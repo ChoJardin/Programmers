@@ -1,0 +1,33 @@
+// [문제 링크]: https://www.acmicpc.net/problem/1149
+
+import sys
+input = sys.stdin.readline
+​
+​
+N = int(input())
+​
+costs = [list(map(int, input().split())) for _ in range(N)]
+​
+​
+# 현재 위치에서 빨강을 가장 적은 비용으로 칠할 수 있는 경우는? 이전에 초록이나 파랑을 칠했고, 그 중에 더 적은 비용
+​
+min_cost = [costs[0][0], costs[0][1], costs[0][2]]
+​
+for i in range(1, N):
+    now_cost = costs[i]
+​
+    current_min = []
+​
+    for j in range(3):
+        # 이번에 빨강으로 칠하겠음
+        if j == 0:
+            # 이전의 초록과 파랑의 최소비용 + 현재 빨강으로 칠하는 비용
+            current_min.append(min(min_cost[1], min_cost[2]) + now_cost[0])
+        elif j == 1:
+            current_min.append(min(min_cost[0], min_cost[2]) + now_cost[1])
+        elif j == 2:
+            current_min.append(min(min_cost[0], min_cost[1]) + now_cost[2])
+​
+    min_cost = current_min
+​
+print(min(min_cost))
