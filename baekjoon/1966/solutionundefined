@@ -1,0 +1,48 @@
+// [문제 링크]: https://www.acmicpc.net/problem/1966
+
+from collections import deque
+import sys
+input = sys.stdin.readline
+​
+N = int(input())
+​
+for i in range(N):
+    # 총 인쇄 개수, 찾는 순서
+    [total, sequence] = map(int, input().split())
+    # 중요도
+    papers = deque(map(int, input().split()))
+​
+    # 지금 순번을 뽑아서 
+    # 가장 중요한 프린트인가? 인쇄함 
+    # 아니라면 큐에 다시 넣어주기...
+    cnt = 0
+    is_printed = False
+​
+    while len(papers) > 1:
+        # 지금 뽑아야 할 친구
+        need_print = papers.popleft()
+​
+        # 가장 중요함
+        if need_print >= max(papers):
+            # 프린트한다
+            cnt += 1
+            # 내가 찾던 그 프린트?
+            if sequence == 0:
+                is_printed = True
+                break
+            else:
+                sequence -= 1
+        # 가장 중요하지 않음 == 프린트 하지 않고 큐의 맨 뒤에 넣기
+        else:
+​
+            papers.append(need_print)
+​
+            if sequence == 0:
+                sequence = len(papers) - 1
+            else:
+                sequence -= 1
+​
+    if is_printed:
+        print(cnt)
+    else:
+        print(cnt + 1)
