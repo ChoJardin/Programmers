@@ -1,0 +1,18 @@
+// [문제 링크]: https://www.acmicpc.net/problem/11279
+
+import heapq
+import sys 
+​
+N = int(input())
+​
+queue = []
+​
+for i in range(N):
+    now_in = int(sys.stdin.readline())
+​
+    if not now_in:
+        if not queue: print(0)
+        else: print(heapq.heappop(queue)*(-1))
+    else:
+        heapq.heappush(queue, now_in*(-1))
+​
