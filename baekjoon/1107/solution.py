@@ -1,9 +1,5 @@
 // [문제 링크]: https://www.acmicpc.net/problem/1107
 
-def perm():
-    pass
-​
-​
 def press(N, pressable):
 ​
     if not pressable:
@@ -11,32 +7,29 @@ def press(N, pressable):
 ​
     possible = []
 ​
-    made = ''
-​
     need_press = list(N)
     for each in need_press:
         if each not in pressable:
             break
-        made += each
     # 모든 버튼을 누를 수 있음
     else:
         return min(len(N), abs(100 - int(N)))
 ​
-    # 한 자리 수 더 작은 제일 큰 수
-    small = ''.join([max(pressable) for _ in range(len(N)-1)])
-    possible.append(small)
-​
-    # 한 자리 수 더 큰 제일 작은 수
-    if pressable[0] == '0':
-        if len(pressable) == 1:
-            big = [pressable[0]]
-        else:
-            big = [pressable[1]]
-    else:
-        big = [pressable[0]]
-​
-    big += [min(pressable) for _ in range(len(N))]
-    possible.append(''.join(big))
+    # # 한 자리 수 더 작은 제일 큰 수
+    # small = ''.join([max(pressable) for _ in range(len(N)-1)])
+    # possible.append(small)
+    #
+    # # 한 자리 수 더 큰 제일 작은 수
+    # if pressable[0] == '0':
+    #     if len(pressable) == 1:
+    #         big = [pressable[0]]
+    #     else:
+    #         big = [pressable[1]]
+    # else:
+    #     big = [pressable[0]]
+    #
+    # big += [min(pressable) for _ in range(len(N))]
+    # possible.append(''.join(big))
 ​
     # 같은 자리 수
     num_n = int(N)
